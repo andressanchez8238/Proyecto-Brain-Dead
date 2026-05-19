@@ -1560,6 +1560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6365d92a3084f784484dec753f944039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
+  characterCamera: {fileID: 0}
+  rotationSpeed: 200
 --- !u!1 &1684720808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +1960,7 @@ SceneRoots:
   - {fileID: 1808158222}
   - {fileID: 1640881222}
   - {fileID: 996831436}
+  - {fileID: 2084760276}
   - {fileID: 1555218710}
   - {fileID: 27310974}
   - {fileID: 1684720814}
-  - {fileID: 2084760276}

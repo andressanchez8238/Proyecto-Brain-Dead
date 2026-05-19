@@ -1,8 +1,7 @@
-public enum Zombies
+public enum Zombiesability
 {
-    zombieNormal,
+    None,
     zombieSaltarin,
-    zombieMutado,
     zombieExplosivo
 }
 public enum Weapons

@@ -16,4 +16,4 @@ MonoBehaviour:
   life: 500
   speed: 2
   damage: 2
-  typeZombie: 2
+  typeZombie: 0

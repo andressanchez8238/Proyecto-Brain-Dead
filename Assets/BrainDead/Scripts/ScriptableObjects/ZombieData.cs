@@ -6,5 +6,5 @@ public class ZombieData : PrincipalData
     public int life;
     public float speed;
     public int damage;
-    public Zombies typeZombie;
+    public Zombiesability typeZombie;
 }
