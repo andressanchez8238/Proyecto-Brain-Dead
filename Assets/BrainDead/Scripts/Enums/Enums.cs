@@ -5,3 +5,9 @@ public enum Zombies
     zombieMutado,
     zombieExplosivo
 }
+public enum Weapons
+{
+    pistol,
+    shotgun,
+    assaultRifle
+}

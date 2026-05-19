@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,11 @@ public class Movement : MonoBehaviour
     private InputSystem_Actions inputs;
     private CharacterController controller;
     private Vector2 moveInput;
+    public CinemachineCamera characterCamera;
+
+
+
+    public float rotationSpeed = 200f;
 
     private void Awake()
     {
@@ -31,6 +37,13 @@ public class Movement : MonoBehaviour
     }
     public void OnMove()
     {
-
+        Vector3 cameraForwardDir=characterCamera.transform.forward;
+        cameraForwardDir.y = 0;
+        cameraForwardDir.Normalize();
+        if (moveInput != Vector2.zero)
+        {
+            Quaternion TargetQuaternion = Quaternion.LookRotation(cameraForwardDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, TargetQuaternion, rotationSpeed * Time.deltaTime);
+        }
     }
 }
