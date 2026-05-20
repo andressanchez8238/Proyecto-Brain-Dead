@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
     public CinemachineCamera characterCamera;
 
 
-
+    [SerializeReference] private float moveSpeed = 10f;
     public float rotationSpeed = 200f;
 
     private void Awake()
@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        
+        OnMove();
     }
     public void OnMove()
     {
@@ -45,5 +45,7 @@ public class Movement : MonoBehaviour
             Quaternion TargetQuaternion = Quaternion.LookRotation(cameraForwardDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, TargetQuaternion, rotationSpeed * Time.deltaTime);
         }
+        Vector3 moveDir =(cameraForwardDir*moveInput.y+transform.right*moveInput.x)* moveSpeed;
+        controller.Move(moveDir*Time.deltaTime);
     }
 }
