@@ -4,12 +4,13 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField] private StatsPlayer statsPlayer;
     private InputSystem_Actions inputs;
     private CharacterController controller;
     private Vector2 moveInput;
     public CinemachineCamera characterCamera;
 
-
+    private bool IsSprint;
     [SerializeReference] private float moveSpeed = 10f;
     public float rotationSpeed = 200f;
 
@@ -25,6 +26,8 @@ public class Movement : MonoBehaviour
         inputs.Enable();
         inputs.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputs.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+        inputs.Player.Sprint.performed += OnSprint;
+        inputs.Player.Sprint.canceled += OnSprint;
 
     }
     void Start()
@@ -47,5 +50,9 @@ public class Movement : MonoBehaviour
         }
         Vector3 moveDir =(cameraForwardDir*moveInput.y+transform.right*moveInput.x)* moveSpeed;
         controller.Move(moveDir*Time.deltaTime);
+    }
+    public void OnSprint(InputAction.CallbackContext Context)
+    {
+
     }
 }
