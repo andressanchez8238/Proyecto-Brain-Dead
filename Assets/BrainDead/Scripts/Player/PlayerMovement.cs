@@ -4,13 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private StatsPlayer statsPlayer;
     private InputSystem_Actions inputs;
     private CharacterController controller;
     private Vector2 moveInput;
     public CinemachineCamera characterCamera;
+    public Vector3 DampingCamera;
 
     private bool IsSprint;
 
@@ -18,11 +19,14 @@ public class Movement : MonoBehaviour
     public float rotationSpeed = 200f;
     [SerializeReference] private float moveSpeed = 10f;
     [SerializeReference] private float SprintSpeed = 15f;
+    [SerializeField] private float DampingSprint=0.1f;
+    [SerializeField] private float velocityTransicion = 5f;
     [SerializeReference] private float jumpForce = 10f;
     private float verticalVelocity;
 
     private void Awake()
     {
+        statsPlayer = GetComponent<StatsPlayer>();
         inputs = new();
         controller = GetComponent<CharacterController>();
         Cursor.visible = false;
@@ -59,6 +63,7 @@ public class Movement : MonoBehaviour
         }
         if (IsSprint && statsPlayer.Stamina>=0)
         {
+            DampingCamera=new Vector3 (DampingSprint,DampingSprint,DampingSprint);
             moveDir = (cameraForwardDir * moveInput.y + transform.right * moveInput.x) * SprintSpeed;
             statsPlayer.StaminaRecarga = false;
             statsPlayer.DisminuirStamina();
@@ -66,7 +71,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-
+            DampingCamera=Vector3.zero;
             moveDir = (cameraForwardDir * moveInput.y + transform.right * moveInput.x) * moveSpeed;
             statsPlayer.StaminaRecarga= true;
             statsPlayer.cooldownStamina+= Time.deltaTime;
@@ -74,6 +79,12 @@ public class Movement : MonoBehaviour
             {
                 statsPlayer.AumentarStamina();
             }
+        }
+
+        CinemachineOrbitalFollow orbitalFollow=characterCamera.GetComponent<CinemachineOrbitalFollow>();
+        if (orbitalFollow != null) 
+        {
+            orbitalFollow.TrackerSettings.PositionDamping = Vector3.Lerp(orbitalFollow.TrackerSettings.PositionDamping, DampingCamera, Time.deltaTime * velocityTransicion);
         }
 
         verticalVelocity += Physics.gravity.y * Time.deltaTime;
@@ -96,5 +107,9 @@ public class Movement : MonoBehaviour
             statsPlayer.Stamina -= 5;
             statsPlayer.cooldownStamina = 0f;
         }
+    }
+    private void CambioDamping()
+    {
+
     }
 }

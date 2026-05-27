@@ -1064,7 +1064,7 @@ MonoBehaviour:
   TargetOffset: {x: 0, y: 0, z: 0}
   TrackerSettings:
     BindingMode: 4
-    PositionDamping: {x: 1, y: 1, z: 1}
+    PositionDamping: {x: 0, y: 0, z: 0}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
@@ -1072,14 +1072,14 @@ MonoBehaviour:
   Radius: 5
   Orbits:
     Top:
-      Radius: 2.5
-      Height: 5
+      Radius: 2
+      Height: 4.5
     Center:
-      Radius: 2.5
-      Height: 2.25
+      Radius: 4.5
+      Height: 1.8
     Bottom:
       Radius: 2.5
-      Height: 0.1
+      Height: 0.5
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
@@ -1163,8 +1163,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114467085}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07808136, y: 0.21236338, z: -0.017025694, w: 0.9739175}
-  m_LocalPosition: {x: -4, y: 1.7174287, z: 33.422855}
+  m_LocalRotation: {x: 0.06896097, y: 0.15716879, z: -0.011002452, w: 0.9850997}
+  m_LocalPosition: {x: -4, y: 1.7935426, z: 32.39614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5114,8 +5114,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759599642}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07808137, y: 0.21236339, z: -0.017025696, w: 0.9739175}
-  m_LocalPosition: {x: -4, y: 1.7174287, z: 33.422855}
+  m_LocalRotation: {x: 0.06896099, y: 0.1571688, z: -0.011002457, w: 0.9850997}
+  m_LocalPosition: {x: -4, y: 1.7935426, z: 32.39614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8829,11 +8829,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6365d92a3084f784484dec753f944039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  statsPlayer: {fileID: 1640881224}
+  statsPlayer: {fileID: 0}
   characterCamera: {fileID: 114467090}
-  rotationSpeed: 200
+  DampingCamera: {x: 0, y: 0, z: 0}
+  rotationSpeed: 100
   moveSpeed: 10
   SprintSpeed: 15
+  DampingSprint: 0.1
+  velocityTransicion: 5
   jumpForce: 10
 --- !u!114 &1640881224
 MonoBehaviour:
