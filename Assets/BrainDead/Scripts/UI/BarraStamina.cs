@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarraEstadistica : MonoBehaviour
+public class BarraStamina : MonoBehaviour
 {
     public Image Relleno;
     private StatsPlayer Player;
