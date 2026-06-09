@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 DampingCamera;
 
     private bool IsSprint;
+    public bool canMove = false;
 
 
     public float rotationSpeed = 200f;
