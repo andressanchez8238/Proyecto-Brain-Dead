@@ -10,3 +10,10 @@ public enum Weapons
     shotgun,
     assaultRifle
 }
+public enum BuffType
+{
+    None,
+    Speed,
+    Slow,
+    Poison,
+}
