@@ -941,6 +941,7 @@ GameObject:
   - component: {fileID: 97171959}
   - component: {fileID: 97171961}
   - component: {fileID: 97171960}
+  - component: {fileID: 97171962}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1067,6 +1068,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97171958}
   m_CullTransparentMesh: 1
+--- !u!114 &97171962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97171958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04010fdf67ba39041882f9b4959852c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CantidadGranada
 --- !u!1 &114223550
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,6 +2795,7 @@ GameObject:
   - component: {fileID: 281225006}
   - component: {fileID: 281225008}
   - component: {fileID: 281225007}
+  - component: {fileID: 281225009}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2908,6 +2922,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281225005}
   m_CullTransparentMesh: 1
+--- !u!114 &281225009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281225005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46395258e3aa6144dbf80088745ddc41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CantidadMadera
 --- !u!1 &301515434
 GameObject:
   m_ObjectHideFlags: 0
@@ -9256,6 +9282,7 @@ GameObject:
   - component: {fileID: 1640881221}
   - component: {fileID: 1640881223}
   - component: {fileID: 1640881224}
+  - component: {fileID: 1640881225}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -9345,6 +9372,20 @@ MonoBehaviour:
   StaminaRecarga: 0
   MaxVida: 100
   VidaActual: 100
+--- !u!114 &1640881225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640881220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eac8e243741ca845ba4001f35fdcf90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  Madera: 0
+  Granada: 0
 --- !u!1 &1650897196
 GameObject:
   m_ObjectHideFlags: 0

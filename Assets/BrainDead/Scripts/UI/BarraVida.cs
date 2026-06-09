@@ -15,8 +15,6 @@ public class BarraVida : MonoBehaviour
         Player = GameObject.FindWithTag("Player").GetComponent<StatsPlayer>();
         BarraLlena = Player.MaxVida;
     }
-
-    // Update is called once per frame
     void Update()
     {
         Relleno.fillAmount = Player.VidaActual / BarraLlena;
