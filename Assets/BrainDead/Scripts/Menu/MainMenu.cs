@@ -22,6 +22,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Andres");
     }
+    public void PlayMenu()
+    {
+        SceneManager.LoadScene("Pantalla de inicio");
+    }
     public void QuitGame()
     {
         Application.Quit();
