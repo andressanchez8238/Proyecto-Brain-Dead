@@ -10,6 +10,10 @@ public class StatsPlayer : MonoBehaviour
     public bool StaminaRecarga=false;
 
 
+    public int MaxVida = 100;
+    public int VidaActual = 100;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,5 +39,13 @@ public class StatsPlayer : MonoBehaviour
         {
             Stamina += Time.deltaTime*CambioStamina;
         }
+    }
+    public void DisminuirVida(int daño)
+    {
+        VidaActual -= daño;
+    }
+    public void AumentarVida(int curacion)
+    {
+        VidaActual += curacion;
     }
 }
