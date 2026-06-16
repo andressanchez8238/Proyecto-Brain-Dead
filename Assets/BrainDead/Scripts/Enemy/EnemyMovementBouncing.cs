@@ -4,7 +4,11 @@ using UnityEngine.AI;
 public class EnemyMovementBouncing : MonoBehaviour
 {
     public Transform Player;
+    public float speed = 3f;
     public Transform meshVisual;
+
+    [Header("Detection Radio")]
+    public float detectionRadius = 8f;
 
     [Header("Jump Configuration")]
     public float frequencyJump = 2f;
@@ -21,26 +25,43 @@ public class EnemyMovementBouncing : MonoBehaviour
     {
         if (Player != null)
         {
-            agente.SetDestination(Player.position);
-        }
+            float distanciaAlJugador = Vector3.Distance(transform.position, Player.position);
 
-        VisualJump();
+            if (distanciaAlJugador <= detectionRadius)
+            {
+                agente.SetDestination(Player.position);
+            }
+            else
+            {
+                if (agente.hasPath)
+                {
+                    agente.ResetPath();
+                }
+            }
+
+            VisualJump();
+        }
+        void VisualJump()
+        {
+            if (agente.velocity.magnitude > 0.1f && agente.remainingDistance > agente.stoppingDistance)
+            {
+                float salto = Mathf.Abs(Mathf.Sin(Time.time * frequencyJump * Mathf.PI));
+
+                Vector3 posicionLocal = meshVisual.localPosition;
+                posicionLocal.y = salto * heightJump;
+                meshVisual.localPosition = posicionLocal;
+            }
+            else
+            {
+                Vector3 posicionLocal = meshVisual.localPosition;
+                posicionLocal.y = Mathf.Lerp(posicionLocal.y, 0, Time.deltaTime * 10f);
+                meshVisual.localPosition = posicionLocal;
+            }
+        } 
     }
-    void VisualJump()
+    private void OnDrawGizmos()
     {
-        if (agente.velocity.magnitude > 0.1f && agente.remainingDistance > agente.stoppingDistance)
-        {
-            float salto = Mathf.Abs(Mathf.Sin(Time.time * heightJump * Mathf.PI));
-
-            Vector3 posicionLocal = meshVisual.localPosition;
-            posicionLocal.y = salto * heightJump;
-            meshVisual.localPosition = posicionLocal;
-        }
-        else
-        {
-            Vector3 posicionLocal = meshVisual.localPosition;
-            posicionLocal.y = Mathf.Lerp(posicionLocal.y, 0, Time.deltaTime * 10f);
-            meshVisual.localPosition = posicionLocal;
-        }
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }
