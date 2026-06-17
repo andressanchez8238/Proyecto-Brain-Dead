@@ -17,3 +17,10 @@ public enum BuffType
     Slow,
     Poison,
 }
+
+public enum ItemType
+{
+    None,
+    Weapon,
+    Tool
+}
