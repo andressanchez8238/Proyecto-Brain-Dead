@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Transform handPoint;
 
-    // Update is called once per frame
-    void Update()
+    private GameObject currentObject;
+
+    public void EquipItem(ItemDataBase item)
     {
-        
+        if (item == null)
+            return;
+
+        if (currentObject != null)
+        {
+            Destroy(currentObject);
+        }
+
+        currentObject = Instantiate(item.handPrefab, handPoint.position, handPoint.rotation, handPoint);
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
+
 [System.Serializable]
-public class HotbarSlot : MonoBehaviour
+public class HotbarSlot
 {
     public ItemDataBase item;
 }
