@@ -27,6 +27,8 @@ public class HotbarManager : MonoBehaviour
             {
                 slots[i].item = item;
 
+                UIHotbar.Instance.Refresh();
+
                 Debug.Log($"{item.itemName} agregado al slot {i}");
 
                 return true;

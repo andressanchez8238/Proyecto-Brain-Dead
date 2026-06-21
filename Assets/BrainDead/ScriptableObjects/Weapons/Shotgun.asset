@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   ID: 1
+  itemName: 
+  icon: {fileID: 0}
+  handPrefab: {fileID: 0}
+  itemType: 1
   municionMax: 5
   typeWeapon: 1

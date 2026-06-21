@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: AssaultRifle
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   ID: 2
+  itemName: 
+  icon: {fileID: 0}
+  handPrefab: {fileID: 0}
+  itemType: 1
   municionMax: 30
   typeWeapon: 2
