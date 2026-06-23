@@ -4,4 +4,6 @@ using UnityEngine;
 public class HotbarSlot
 {
     public ItemDataBase item;
+
+    public WeaponState weaponState;
 }

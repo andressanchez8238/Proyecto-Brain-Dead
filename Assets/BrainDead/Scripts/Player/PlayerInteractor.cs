@@ -20,6 +20,9 @@ public class PlayerInteractor : MonoBehaviour
 
         inputs.Player.Interact.performed += Interact;
 
+        inputs.Player.Fire.performed += Fire;
+        inputs.Player.Reload.performed += Reload;
+
         inputs.Player.Slot1.performed += ctx => SelectSlot(0);
         inputs.Player.Slot2.performed += ctx => SelectSlot(1);
         inputs.Player.Slot3.performed += ctx => SelectSlot(2);
@@ -29,6 +32,8 @@ public class PlayerInteractor : MonoBehaviour
     private void OnDisable()
     {
         inputs.Player.Interact.performed -= Interact;
+        inputs.Player.Fire.performed -= Fire;
+        inputs.Player.Reload.performed -= Reload;
 
         inputs.Disable();
     }
@@ -38,11 +43,17 @@ public class PlayerInteractor : MonoBehaviour
         ItemDataBase item = HotbarManager.Instance.GetItem(slot);
 
         if (item == null)
+            return;
+
+        WeaponState state = HotbarManager.Instance.GetWeaponState(slot);
+
+        if (item is WeaponData && state == null)
         {
+            Debug.LogWarning("Este slot es arma pero no tiene WeaponState");
             return;
         }
 
-        equipmentManager.EquipItem(item);
+        equipmentManager.EquipItem(item, state);
 
         UIHotbar.Instance.SelectSlot(slot);
 
@@ -61,9 +72,24 @@ public class PlayerInteractor : MonoBehaviour
             Debug.Log($"Recogiste {currentItem.itemData.itemName}");
 
             Destroy(currentItem.gameObject);
-
             currentItem = null;
         }
+    }
+
+    private void Fire(InputAction.CallbackContext ctx)
+    {
+        if (equipmentManager.CurrentWeapon == null)
+            return;
+
+        equipmentManager.CurrentWeapon.Shoot();
+    }
+
+    private void Reload(InputAction.CallbackContext ctx)
+    {
+        if (equipmentManager.CurrentWeapon == null)
+            return;
+
+        equipmentManager.CurrentWeapon.Reload();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,7 +99,6 @@ public class PlayerInteractor : MonoBehaviour
         if (item != null)
         {
             currentItem = item;
-
             Debug.Log($"Presiona E para recoger {item.itemData.itemName}");
         }
     }
@@ -85,7 +110,6 @@ public class PlayerInteractor : MonoBehaviour
         if (item == currentItem)
         {
             currentItem = null;
-
             Debug.Log("Fuera del rango");
         }
     }

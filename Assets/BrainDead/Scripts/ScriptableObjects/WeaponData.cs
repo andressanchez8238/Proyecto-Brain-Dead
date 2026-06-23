@@ -5,5 +5,11 @@ public class WeaponData : ItemDataBase
 {
     public int municionMax;
 
+    public float damage;
+
+    public float fireRate;
+
     public Weapons typeWeapon;
+
+    public AmmoType ammoType;
 }

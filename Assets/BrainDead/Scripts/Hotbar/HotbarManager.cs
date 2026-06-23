@@ -27,6 +27,15 @@ public class HotbarManager : MonoBehaviour
             {
                 slots[i].item = item;
 
+                if (item is WeaponData weapon)
+                {
+                    slots[i].weaponState = new WeaponState();
+
+                    slots[i].weaponState.weaponData = weapon;
+
+                    slots[i].weaponState.currentAmmo = weapon.municionMax;
+                }
+
                 UIHotbar.Instance.Refresh();
 
                 Debug.Log($"{item.itemName} agregado al slot {i}");
@@ -46,5 +55,12 @@ public class HotbarManager : MonoBehaviour
             return null;
 
         return slots[slotIndex].item;
+    }
+    public WeaponState GetWeaponState(int slotIndex)
+    {
+        if (slotIndex < 0 || slotIndex >= slots.Length)
+            return null;
+
+        return slots[slotIndex].weaponState;
     }
 }

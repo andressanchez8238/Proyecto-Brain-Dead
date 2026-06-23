@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
+    public Weapon CurrentWeapon { get; private set; }
+
     public Transform handPoint;
 
     private GameObject currentObject;
 
-    public void EquipItem(ItemDataBase item)
+    public void EquipItem(ItemDataBase item, WeaponState state)
     {
         if (item == null)
             return;
@@ -16,6 +18,13 @@ public class EquipmentManager : MonoBehaviour
             Destroy(currentObject);
         }
 
-        currentObject = Instantiate(item.handPrefab, handPoint.position, handPoint.rotation, handPoint);
+        currentObject = Instantiate(item.handPrefab, handPoint.position, handPoint.rotation,handPoint);
+
+        CurrentWeapon = currentObject.GetComponent<Weapon>();
+
+        if (CurrentWeapon != null)
+        {
+            CurrentWeapon.Initialize(state);
+        }
     }
 }
