@@ -28,7 +28,10 @@ public class PlayerInteractor : MonoBehaviour
     {
         inputs.Disable();
     }
-
+    private void Update()
+    {
+        Debug.DrawRay(playerCamera.transform.position,playerCamera.transform.forward * interactDistance,Color.red);
+    }
     private void SelectSlot(int slot)
     {
         ItemDataBase item = HotbarManager.Instance.GetItem(slot);
@@ -44,24 +47,29 @@ public class PlayerInteractor : MonoBehaviour
     }
     private void Interact(InputAction.CallbackContext ctx)
     {
-        Debug.Log("E presionada");
-        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        Debug.Log("Interact ejecutado");
+
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
         {
-            PickableItem item = hit.collider.GetComponent<PickableItem>();
+            Debug.Log("Golpeó: " + hit.collider.name);
 
-            if (item == null)
+            PickableItem item = hit.collider.GetComponentInParent<PickableItem>();
+
+            if (item != null)
             {
-                return;
-            }  
+                bool added = HotbarManager.Instance.AddItem(item.itemData);
 
-            bool added = HotbarManager.Instance.AddItem(item.itemData);
-
-            if (added)
-            {
-                Destroy(item.gameObject);
+                if (added)
+                {
+                    Destroy(item.gameObject);
+                }
             }
+        }
+        else
+        {
+            Debug.Log("NO golpeó nada");
         }
     }
 }
