@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7862a8a06ba546b43a2c3f737e1b8762, type: 3}
   m_Name: AssaultRifle
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  ID: 2
-  itemName: 
-  icon: {fileID: 0}
-  handPrefab: {fileID: 0}
+  ID: 3
+  itemName: RifleDeAsalto
+  icon: {fileID: 21300000, guid: 0c6fdac4e4298344f9b74813f24273fa, type: 3}
+  handPrefab: {fileID: 1885450382905591216, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
   itemType: 1
   municionMax: 30
   typeWeapon: 2

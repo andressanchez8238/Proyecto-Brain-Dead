@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7862a8a06ba546b43a2c3f737e1b8762, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  ID: 1
-  itemName: 
-  icon: {fileID: 0}
-  handPrefab: {fileID: 0}
+  ID: 2
+  itemName: Escopeta
+  icon: {fileID: 21300000, guid: 3c464ec4fa4beeb40969c2d6c354f3d4, type: 3}
+  handPrefab: {fileID: 1150425342292270146, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
   itemType: 1
   municionMax: 5
   typeWeapon: 1

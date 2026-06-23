@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7862a8a06ba546b43a2c3f737e1b8762, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  ID: 0
-  itemName: 
-  icon: {fileID: 0}
-  handPrefab: {fileID: 0}
+  ID: 1
+  itemName: Pistola
+  icon: {fileID: 21300000, guid: 126da958e1b80b241aaeaf9934ac4eb1, type: 3}
+  handPrefab: {fileID: 5414634592916788571, guid: c9eec60f179e4524cb93b9b96b1fcd6e, type: 3}
   itemType: 1
   municionMax: 15
   typeWeapon: 0

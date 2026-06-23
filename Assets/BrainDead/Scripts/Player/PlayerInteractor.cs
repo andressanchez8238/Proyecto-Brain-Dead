@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] private EquipmentManager equipmentManager;
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private float interactDistance = 3f;
+
+    private PickableItem currentItem;
 
     private InputSystem_Actions inputs;
 
@@ -17,7 +17,9 @@ public class PlayerInteractor : MonoBehaviour
     private void OnEnable()
     {
         inputs.Enable();
+
         inputs.Player.Interact.performed += Interact;
+
         inputs.Player.Slot1.performed += ctx => SelectSlot(0);
         inputs.Player.Slot2.performed += ctx => SelectSlot(1);
         inputs.Player.Slot3.performed += ctx => SelectSlot(2);
@@ -26,18 +28,19 @@ public class PlayerInteractor : MonoBehaviour
 
     private void OnDisable()
     {
+        inputs.Player.Interact.performed -= Interact;
+
         inputs.Disable();
     }
-    private void Update()
-    {
-        Debug.DrawRay(playerCamera.transform.position,playerCamera.transform.forward * interactDistance,Color.red);
-    }
+
     private void SelectSlot(int slot)
     {
         ItemDataBase item = HotbarManager.Instance.GetItem(slot);
 
         if (item == null)
+        {
             return;
+        }
 
         equipmentManager.EquipItem(item);
 
@@ -45,31 +48,45 @@ public class PlayerInteractor : MonoBehaviour
 
         Debug.Log($"Slot seleccionado: {slot + 1}");
     }
+
     private void Interact(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Interact ejecutado");
+        if (currentItem == null)
+            return;
 
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        bool added = HotbarManager.Instance.AddItem(currentItem.itemData);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
+        if (added)
         {
-            Debug.Log("Golpeó: " + hit.collider.name);
+            Debug.Log($"Recogiste {currentItem.itemData.itemName}");
 
-            PickableItem item = hit.collider.GetComponentInParent<PickableItem>();
+            Destroy(currentItem.gameObject);
 
-            if (item != null)
-            {
-                bool added = HotbarManager.Instance.AddItem(item.itemData);
-
-                if (added)
-                {
-                    Destroy(item.gameObject);
-                }
-            }
+            currentItem = null;
         }
-        else
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PickableItem item = other.GetComponent<PickableItem>();
+
+        if (item != null)
         {
-            Debug.Log("NO golpeó nada");
+            currentItem = item;
+
+            Debug.Log($"Presiona E para recoger {item.itemData.itemName}");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        PickableItem item = other.GetComponent<PickableItem>();
+
+        if (item == currentItem)
+        {
+            currentItem = null;
+
+            Debug.Log("Fuera del rango");
         }
     }
 }
