@@ -18,4 +18,7 @@ MonoBehaviour:
   handPrefab: {fileID: 1885450382905591216, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
   itemType: 1
   municionMax: 30
+  damage: 75
+  fireRate: 75
   typeWeapon: 2
+  ammoType: 2
