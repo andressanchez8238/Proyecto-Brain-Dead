@@ -20,10 +20,22 @@ public class EquipmentManager : MonoBehaviour
 
         currentObject = Instantiate(item.handPrefab, handPoint.position, handPoint.rotation,handPoint);
 
-        CurrentWeapon = currentObject.GetComponent<Weapon>();
+        Weapon weapon = currentObject.GetComponent<Weapon>();
 
-        if (CurrentWeapon != null)
+        if (weapon != null)
         {
+            weapon.SetWeaponData(item as WeaponData);
+
+            CurrentWeapon = weapon;
+
+            CurrentWeapon.Initialize(state);
+        }
+
+        CurrentWeapon = null;
+
+        if (weapon != null)
+        {
+            CurrentWeapon = weapon;
             CurrentWeapon.Initialize(state);
         }
     }

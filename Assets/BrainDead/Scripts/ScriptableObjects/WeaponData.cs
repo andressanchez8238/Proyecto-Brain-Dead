@@ -12,4 +12,6 @@ public class WeaponData : ItemDataBase
     public Weapons typeWeapon;
 
     public AmmoType ammoType;
+
+    public GameObject bulletPrefab;
 }

@@ -2,36 +2,82 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private Transform bulletSpawn;
+
+    private Camera playerCamera;
+
     public WeaponData weaponData;
 
     private WeaponState weaponState;
 
-    private void Start()
+    private void Awake()
     {
-        weaponState.currentAmmo = weaponData.municionMax;
+        bulletSpawn = transform.GetComponentInChildren<Transform>();
 
-        RefreshUI();
+        foreach (Transform child in GetComponentsInChildren<Transform>())
+        {
+            if (child.name.StartsWith("SpawnPoint"))
+            {
+                bulletSpawn = child;
+
+                Debug.Log("Spawn encontrado: " + child.name);
+
+                break;
+            }
+        }
     }
+
     public void Initialize(WeaponState state)
     {
         weaponState = state;
+
+        playerCamera = Camera.main;
 
         RefreshUI();
     }
 
     public void Shoot()
     {
+        if (weaponState == null)
+        {
+            Debug.LogError("WeaponState es NULL");
+            return;
+        }
+
+        if (weaponData == null)
+        {
+            Debug.LogError("WeaponData es NULL");
+            return;
+        }
+
         if (weaponState.currentAmmo <= 0)
         {
             Debug.Log("Sin balas");
             return;
         }
 
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+        Vector3 targetPoint;
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+            targetPoint = hit.point;
+        else
+            targetPoint = ray.GetPoint(100f);
+
+        GameObject bullet = Instantiate(weaponData.bulletPrefab, bulletSpawn.position, Quaternion.identity);
+
+        Vector3 direction = (targetPoint - bulletSpawn.position).normalized;
+
+        bullet.transform.forward = direction;
+
         weaponState.currentAmmo--;
 
-        Debug.Log($"Disparo. Balas: {weaponState.currentAmmo}");
-
-        RefreshUI();        
+        RefreshUI();
+    }
+    public void SetWeaponData(WeaponData data)
+    {
+        weaponData = data;
     }
 
     public void Reload()

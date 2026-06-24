@@ -22,3 +22,4 @@ MonoBehaviour:
   fireRate: 25
   typeWeapon: 0
   ammoType: 1
+  bulletPrefab: {fileID: 6742445923064659481, guid: a9a3f3ebd56721d49b4fa9153799fa55, type: 3}

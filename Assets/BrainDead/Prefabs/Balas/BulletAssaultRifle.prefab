@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6801558949912371097}
   - component: {fileID: 3385861188741664660}
   - component: {fileID: 2627361833043614634}
+  - component: {fileID: 8093330473961378012}
   m_Layer: 0
   m_Name: BulletAssaultRifle
   m_TagString: Untagged
@@ -90,3 +91,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8093330473961378012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410367633861513597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962ac29b3ddfdbc4a99b608300808e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  speed: 50
+  lifeTime: 10
+  damage: 75

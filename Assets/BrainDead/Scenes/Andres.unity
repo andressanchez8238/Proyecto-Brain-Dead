@@ -1313,27 +1313,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 876408920026174600, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
       propertyPath: m_Size.x
-      value: 0.9999998
+      value: 0.34570444
       objectReference: {fileID: 0}
     - target: {fileID: 876408920026174600, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
       propertyPath: m_Size.y
-      value: 0.35892662
+      value: 0.58965427
       objectReference: {fileID: 0}
     - target: {fileID: 876408920026174600, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
       propertyPath: m_Size.z
-      value: 0.98878473
+      value: 0.5612058
       objectReference: {fileID: 0}
     - target: {fileID: 876408920026174600, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
       propertyPath: m_Center.x
-      value: 1.0477162e-16
+      value: -0.08435569
       objectReference: {fileID: 0}
     - target: {fileID: 876408920026174600, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
       propertyPath: m_Center.y
-      value: 0.03429595
+      value: -0.081067964
       objectReference: {fileID: 0}
     - target: {fileID: 876408920026174600, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
       propertyPath: m_Center.z
-      value: -0.0063571837
+      value: -0.03309002
       objectReference: {fileID: 0}
     - target: {fileID: 876408920026174600, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
       propertyPath: m_IsTrigger
@@ -1343,6 +1343,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AssaultRifle
       objectReference: {fileID: 0}
+    - target: {fileID: 5058851090889422214, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: f90ebf67ef4bb07489f0dfa21219ed83, type: 2}
+    - target: {fileID: 5058851090889422214, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
+      propertyPath: bulletSpawn
+      value: 
+      objectReference: {fileID: 168749693}
     - target: {fileID: 9060160229577213176, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -29.097
@@ -1386,11 +1394,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1885450382905591216, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1520234887}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
+--- !u!4 &168749693 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6455799666499879747, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
+  m_PrefabInstance: {fileID: 168749692}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &217085007
 GameObject:
   m_ObjectHideFlags: 0
@@ -3145,6 +3155,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5902209663235600542, guid: c9eec60f179e4524cb93b9b96b1fcd6e, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: ff02ba0c2d4bc1248aa6b76aa3af7c54, type: 2}
+    - target: {fileID: -5902209663235600542, guid: c9eec60f179e4524cb93b9b96b1fcd6e, type: 3}
+      propertyPath: bulletSpawn
+      value: 
+      objectReference: {fileID: 517482130}
     - target: {fileID: 5414634592916788571, guid: c9eec60f179e4524cb93b9b96b1fcd6e, type: 3}
       propertyPath: m_Name
       value: Pistol
@@ -3192,11 +3210,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5414634592916788571, guid: c9eec60f179e4524cb93b9b96b1fcd6e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 549861892}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9eec60f179e4524cb93b9b96b1fcd6e, type: 3}
+--- !u!4 &517482130 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4681214469883751211, guid: c9eec60f179e4524cb93b9b96b1fcd6e, type: 3}
+  m_PrefabInstance: {fileID: 517482129}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &518244644
 GameObject:
   m_ObjectHideFlags: 0
@@ -3526,24 +3546,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1 &549861887 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5414634592916788571, guid: c9eec60f179e4524cb93b9b96b1fcd6e, type: 3}
-  m_PrefabInstance: {fileID: 517482129}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &549861892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 549861887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bd9b2a504d7ce478e110ce71367000, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponData: {fileID: 11400000, guid: ff02ba0c2d4bc1248aa6b76aa3af7c54, type: 2}
 --- !u!1 &551833967
 GameObject:
   m_ObjectHideFlags: 0
@@ -5136,17 +5138,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -89.41998
       objectReference: {fileID: 0}
+    - target: {fileID: 6273545846995367081, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: bd5af805b8b376f4aa7ea54114418e45, type: 2}
+    - target: {fileID: 6273545846995367081, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
+      propertyPath: bulletSpawn
+      value: 
+      objectReference: {fileID: 775755491}
     - target: {fileID: 9019996261994440120, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
       propertyPath: m_Size.x
       value: 0.24572825
       objectReference: {fileID: 0}
     - target: {fileID: 9019996261994440120, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
       propertyPath: m_Size.y
-      value: 0.29121432
+      value: 0.46447214
       objectReference: {fileID: 0}
     - target: {fileID: 9019996261994440120, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
       propertyPath: m_Size.z
-      value: 0.75129986
+      value: 0.37227428
       objectReference: {fileID: 0}
     - target: {fileID: 9019996261994440120, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
       propertyPath: m_Center.x
@@ -5154,20 +5164,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9019996261994440120, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
       propertyPath: m_Center.y
-      value: -0.00041021133
+      value: -0.004730748
       objectReference: {fileID: 0}
     - target: {fileID: 9019996261994440120, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
       propertyPath: m_Center.z
-      value: 0.015313486
+      value: -0.04704475
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1150425342292270146, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2113656938}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
+--- !u!4 &775755491 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3531762547319862023, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
+  m_PrefabInstance: {fileID: 775755490}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &804781703
 GameObject:
   m_ObjectHideFlags: 0
@@ -5968,7 +5980,7 @@ Transform:
   m_GameObject: {fileID: 1004829493}
   serializedVersion: 2
   m_LocalRotation: {x: 0.49746278, y: -0.5025244, z: 0.49746278, w: 0.5025244}
-  m_LocalPosition: {x: -27.157, y: 0.98239, z: 27.932}
+  m_LocalPosition: {x: -34.507004, y: 0.98239, z: 27.932}
   m_LocalScale: {x: 2.6082492, y: 2.608249, z: 2.6082492}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7971,24 +7983,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1 &1520234882 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1885450382905591216, guid: d29b1a1716352dd408a15c798e421ad7, type: 3}
-  m_PrefabInstance: {fileID: 168749692}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1520234887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520234882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bd9b2a504d7ce478e110ce71367000, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponData: {fileID: 11400000, guid: f90ebf67ef4bb07489f0dfa21219ed83, type: 2}
 --- !u!1 &1543751719
 GameObject:
   m_ObjectHideFlags: 0
@@ -11487,7 +11481,7 @@ Transform:
   m_GameObject: {fileID: 1851875088}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.50000024, z: 0.49999976, w: 0.5}
-  m_LocalPosition: {x: -29.097, y: 1.023, z: 30.156311}
+  m_LocalPosition: {x: -34.56, y: 1.02, z: 30.156311}
   m_LocalScale: {x: 1.6629006, y: 1.6629003, z: 1.6629006}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11577,7 +11571,7 @@ Transform:
   m_GameObject: {fileID: 1858788547}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70710665, w: 0.70710695}
-  m_LocalPosition: {x: -27.061964, y: 0.9819993, z: 26.422565}
+  m_LocalPosition: {x: -34.411964, y: 0.9819993, z: 26.422565}
   m_LocalScale: {x: 2.5998, y: 2.5998, z: 2.5998}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15637,24 +15631,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086656341}
   m_CullTransparentMesh: 1
---- !u!1 &2113656933 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1150425342292270146, guid: 4d13cb94e34872d4ba11b400961655b1, type: 3}
-  m_PrefabInstance: {fileID: 775755490}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2113656938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113656933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bd9b2a504d7ce478e110ce71367000, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponData: {fileID: 11400000, guid: bd5af805b8b376f4aa7ea54114418e45, type: 2}
 --- !u!43 &2122709616
 Mesh:
   m_ObjectHideFlags: 0

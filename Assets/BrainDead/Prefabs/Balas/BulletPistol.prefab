@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9087278200981273964}
   - component: {fileID: 5383723066146603171}
   - component: {fileID: 2541243411370462898}
+  - component: {fileID: -1230634657845539429}
   m_Layer: 0
   m_Name: BulletPistol
   m_TagString: Untagged
@@ -90,3 +91,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-1230634657845539429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6742445923064659481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962ac29b3ddfdbc4a99b608300808e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  speed: 50
+  lifeTime: 10
+  damage: 25

@@ -78,8 +78,15 @@ public class PlayerInteractor : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext ctx)
     {
+        Debug.Log("CLICK IZQUIERDO");
+
         if (equipmentManager.CurrentWeapon == null)
+        {
+            Debug.Log("No hay arma equipada");
             return;
+        }
+
+        Debug.Log("Intentando disparar");
 
         equipmentManager.CurrentWeapon.Shoot();
     }
