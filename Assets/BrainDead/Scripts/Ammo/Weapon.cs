@@ -67,7 +67,7 @@ public class Weapon : MonoBehaviour
 
         GameObject bullet = Instantiate(weaponData.bulletPrefab, bulletSpawn.position, Quaternion.identity);
 
-        Vector3 direction = (targetPoint - bulletSpawn.position).normalized;
+        Vector3 direction = playerCamera.transform.forward;
 
         bullet.transform.forward = direction;
 

@@ -57,15 +57,12 @@ public class PlayerMovement : MonoBehaviour
         cameraForwardDir.y = 0;
         cameraForwardDir.Normalize();
         Vector3 moveDir;
-        if (moveInput != Vector2.zero)
-        {
-            Quaternion TargetQuaternion = Quaternion.LookRotation(cameraForwardDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, TargetQuaternion, rotationSpeed * Time.deltaTime);
-        }
+        Quaternion TargetQuaternion = Quaternion.LookRotation(cameraForwardDir);
+        transform.rotation = TargetQuaternion;
         if (IsSprint && statsPlayer.Stamina>=0)
         {
             DampingCamera=new Vector3 (DampingSprint,DampingSprint,DampingSprint);
-            moveDir = (cameraForwardDir * moveInput.y + transform.right * moveInput.x) * SprintSpeed;
+            moveDir = (transform.forward * moveInput.y + transform.right * moveInput.x) * SprintSpeed;
             statsPlayer.StaminaRecarga = false;
             statsPlayer.DisminuirStamina();
             statsPlayer.cooldownStamina = 0f;
@@ -73,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             DampingCamera=Vector3.zero;
-            moveDir = (cameraForwardDir * moveInput.y + transform.right * moveInput.x) * moveSpeed;
+            moveDir = (transform.forward * moveInput.y + transform.right * moveInput.x) * moveSpeed;
             statsPlayer.StaminaRecarga= true;
             statsPlayer.cooldownStamina+= Time.deltaTime;
             if (statsPlayer.cooldownStamina >= statsPlayer.cooldownStaminaTotal)
