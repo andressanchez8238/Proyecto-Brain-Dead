@@ -4782,6 +4782,7 @@ GameObject:
   - component: {fileID: 759599643}
   - component: {fileID: 759599646}
   - component: {fileID: 759599647}
+  - component: {fileID: 759599648}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4939,6 +4940,22 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &759599648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759599642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdfcc16752b7ae428e5bcb87afc090e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Punterocamara
+  distanciaMaxima: 100
+  capasApunto:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!43 &771017060
 Mesh:
   m_ObjectHideFlags: 0
@@ -5228,7 +5245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &804781704
 RectTransform:
   m_ObjectHideFlags: 0
