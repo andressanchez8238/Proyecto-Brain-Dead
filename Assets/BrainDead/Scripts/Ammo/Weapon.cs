@@ -105,4 +105,14 @@ public class Weapon : MonoBehaviour
 
         UIAmmo.Instance.UpdateAmmo(weaponData.itemName, weaponState.currentAmmo,reserveAmmo);
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (bulletSpawn == null)
+            return;
+
+        Gizmos.color = Color.cyan;
+
+        Gizmos.DrawRay(bulletSpawn.position, bulletSpawn.forward * 10f);
+    }
 }

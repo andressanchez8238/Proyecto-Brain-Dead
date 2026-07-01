@@ -3,6 +3,8 @@ using UnityEngine.AI;
 
 public class EnemyMovementBouncing : MonoBehaviour
 {
+    [SerializeField] private float attackRange = 2f;
+
     public Transform Player;
     public float speed = 3f;
     public Transform meshVisual;
@@ -63,5 +65,13 @@ public class EnemyMovementBouncing : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(transform.position + Vector3.up, transform.forward * 5f);
     }
 }

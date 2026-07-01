@@ -10,7 +10,6 @@ public class SpeedBuff : Buff
         Duration = duration;
         Amount = amount;
     }
-
     public override void Apply(ZombieData entity)
     {
         entity.speed += Amount;
