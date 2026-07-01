@@ -17,10 +17,12 @@ public class EnemyMovementBouncing : MonoBehaviour
     public float heightJump = 1.5f;
 
     private NavMeshAgent agente;
+    private Animator animator;
 
     void Start()
     {
         agente = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -40,7 +42,7 @@ public class EnemyMovementBouncing : MonoBehaviour
                     agente.ResetPath();
                 }
             }
-
+            animator.SetBool("Walk", agente.velocity.magnitude > 0.1f);
             VisualJump();
         }
         void VisualJump()
