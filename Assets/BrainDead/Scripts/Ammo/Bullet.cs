@@ -2,22 +2,37 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float lifeTime = 5f;
-    private void Start()
+    [SerializeField] float speed = 50;
+    [SerializeField] float lifeTime = 5;
+
+    int damage;
+
+    public void Initialize(int newDamage)
+    {
+        damage = newDamage;
+    }
+
+    void Start()
     {
         Destroy(gameObject, lifeTime);
     }
 
-    private void Update()
+    void Update()
     {
-        transform.position += (transform.forward * speed) * Time.deltaTime;
+        transform.position += transform.forward * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Golpeó: " + other.name);
 
-        Destroy(gameObject);
+        EnemyHealth enemy = other.GetComponentInParent<EnemyHealth>();
+
+        if (enemy != null)
+        {
+            Debug.Log("Encontró EnemyHealth");
+
+            enemy.TakeDamage(damage);
+        }
     }
 }

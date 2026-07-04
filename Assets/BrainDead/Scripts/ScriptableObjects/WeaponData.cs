@@ -5,7 +5,7 @@ public class WeaponData : ItemDataBase
 {
     public int municionMax;
 
-    public float damage;
+    public int damage;
 
     public float fireRate;
 

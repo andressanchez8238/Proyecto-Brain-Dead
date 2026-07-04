@@ -67,6 +67,10 @@ public class Weapon : MonoBehaviour
 
         GameObject bullet = Instantiate(weaponData.bulletPrefab, bulletSpawn.position, Quaternion.identity);
 
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+
+        bulletScript.Initialize(weaponData.damage);
+
         Vector3 direction = (targetPoint-bulletSpawn.position).normalized;
 
         bullet.transform.forward = direction;
