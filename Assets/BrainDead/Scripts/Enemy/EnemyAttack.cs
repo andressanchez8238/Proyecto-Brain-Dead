@@ -19,15 +19,4 @@ public class EnemyAttack : MonoBehaviour
             player.DisminuirVida(zombieData.damage);
         }
     }
-    /*public void TakeDamage(float damage)
-    {
-        health -= damage;
-
-        animator.SetTrigger("Hit");
-
-        if (health <= 0)
-        {
-            animator.SetTrigger("Death");
-        }
-    }*/
 }

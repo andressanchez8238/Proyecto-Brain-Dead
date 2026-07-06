@@ -11,10 +11,6 @@ public class ZombiesDataBase : SerializedScriptableObject
     {
         ZombieData zombie =zombieDataBase[Random.Range(0,zombieDataBase.Count)];
 
-
-
         return null;
     }
-
-
 }

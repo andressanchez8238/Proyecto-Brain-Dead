@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -41,12 +42,17 @@ public class EnemyHealth : MonoBehaviour
 
         animator.SetTrigger("Death");
 
-        GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+            agent.enabled = false;
 
         Collider[] colliders = GetComponentsInChildren<Collider>();
 
         foreach (Collider c in colliders)
             c.enabled = false;
+
+        WaveManager.Instance.ZombieKilled();
 
         Destroy(gameObject, 3f);
     }
