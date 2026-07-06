@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class CantidadGranada : MonoBehaviour
 {
-    TextMeshProUGUI Granada;
-    private PlayerInventory Player;
+    private TextMeshProUGUI text;
+
     private void Awake()
     {
-        Granada = GetComponent<TextMeshProUGUI>();
-        Player = GameObject.FindWithTag("Player").GetComponent<PlayerInventory>();
+        text = GetComponent<TextMeshProUGUI>();
     }
-    void Update()
+
+    private void Update()
     {
-        Granada.text = ": " + Player.Granada;
+        text.text = ": " + PlayerInventory.Instance.Grenades;
     }
 }

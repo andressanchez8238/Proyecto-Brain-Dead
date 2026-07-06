@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed08a1bb2b6ebca40a07223d1e330d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableItem
+  pickupRadius: 2
   itemData: {fileID: 11400000, guid: bd5af805b8b376f4aa7ea54114418e45, type: 2}
 --- !u!65 &9019996261994440120
 BoxCollider:
@@ -69,8 +70,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8223069, y: 0.40636912, z: 0.30582842}
-  m_Center: {x: 0.010043204, y: -0.057987213, z: 0.010253463}
+  m_Size: {x: 0.12514979, y: 0.40636912, z: 0.30582842}
+  m_Center: {x: -0.010059025, y: -0.057987213, z: 0.0102534685}
 --- !u!54 &8637290702702816035
 Rigidbody:
   m_ObjectHideFlags: 0

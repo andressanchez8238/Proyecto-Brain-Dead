@@ -2,24 +2,52 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public int Madera;
-    public int Granada;
+    public static PlayerInventory Instance;
 
-    public void AddMadera(int madera)
+    public int Wood { get; private set; }
+
+    public int Grenades { get; private set; }
+
+    private void Awake()
     {
-        Madera += madera;
-    }
-    public void RemoveMadera(int madera) 
-    {
-        Madera -= madera;
-    }
-    public void AddGranada(int granada)
-    {
-        Granada += granada;
-    }
-    public void RemoveGranada(int granada)
-    {
-        Granada -= granada;
+        Instance = this;
     }
 
+    private void Start()
+    {
+        AddGrenades(10);
+    }
+
+    #region Wood
+
+    public void AddWood(int amount)
+    {
+        Wood += amount;
+    }
+
+    public void RemoveWood(int amount)
+    {
+        Wood = Mathf.Max(0, Wood - amount);
+    }
+
+    #endregion
+
+    #region Grenades
+
+    public void AddGrenades(int amount)
+    {
+        Grenades += amount;
+    }
+
+    public bool UseGrenade()
+    {
+        if (Grenades <= 0)
+            return false;
+
+        Grenades--;
+
+        return true;
+    }
+
+    #endregion
 }

@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class CantidadMadera : MonoBehaviour
 {
-    TextMeshProUGUI Madera;
-    private PlayerInventory Player;
+    private TextMeshProUGUI text;
+
     private void Awake()
     {
-        Madera = GetComponent<TextMeshProUGUI>();
-        Player=GameObject.FindWithTag("Player").GetComponent<PlayerInventory>();
+        text = GetComponent<TextMeshProUGUI>();
     }
-    void Update()
+
+    private void Update()
     {
-        Madera.text = ": " + Player.Madera;
+        text.text = ": " + PlayerInventory.Instance.Wood;
     }
 }

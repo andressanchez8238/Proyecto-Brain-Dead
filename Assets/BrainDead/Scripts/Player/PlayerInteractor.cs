@@ -3,7 +3,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteractor : MonoBehaviour
 {
+    [Header("Equipment")]
     [SerializeField] private EquipmentManager equipmentManager;
+
+    [Header("Grenades")]
+    [SerializeField] private GameObject grenadePrefab;
+    [SerializeField] private Transform grenadeSpawn;
+    [SerializeField] private float throwForce = 10f;
+    [SerializeField] private float upwardForce = 4f;
+    [SerializeField] private float torqueForce = 8f;
 
     private PickableItem currentItem;
 
@@ -23,6 +31,8 @@ public class PlayerInteractor : MonoBehaviour
         inputs.Player.Fire.performed += Fire;
         inputs.Player.Reload.performed += Reload;
 
+        inputs.Player.Throw.performed += Throw;
+
         inputs.Player.Slot1.performed += ctx => SelectSlot(0);
         inputs.Player.Slot2.performed += ctx => SelectSlot(1);
         inputs.Player.Slot3.performed += ctx => SelectSlot(2);
@@ -32,8 +42,11 @@ public class PlayerInteractor : MonoBehaviour
     private void OnDisable()
     {
         inputs.Player.Interact.performed -= Interact;
+        
         inputs.Player.Fire.performed -= Fire;
         inputs.Player.Reload.performed -= Reload;
+
+        inputs.Player.Throw.performed -= Throw;
 
         inputs.Disable();
     }
@@ -78,15 +91,11 @@ public class PlayerInteractor : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext ctx)
     {
-        Debug.Log("CLICK IZQUIERDO");
-
         if (equipmentManager.CurrentWeapon == null)
         {
             Debug.Log("No hay arma equipada");
             return;
         }
-
-        Debug.Log("Intentando disparar");
 
         equipmentManager.CurrentWeapon.Shoot();
     }
@@ -97,6 +106,33 @@ public class PlayerInteractor : MonoBehaviour
             return;
 
         equipmentManager.CurrentWeapon.Reload();
+    }
+
+    private void Throw(InputAction.CallbackContext ctx)
+    {
+        if (!PlayerInventory.Instance.UseGrenade())
+            return;
+
+        GameObject grenade = Instantiate(grenadePrefab, grenadeSpawn.position, grenadeSpawn.rotation);
+
+        Rigidbody rb = grenade.GetComponent<Rigidbody>();
+
+        if (rb == null)
+        {
+            Debug.LogError("La granada no tiene Rigidbody.");
+            return;
+        }
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        Transform cam = Camera.main.transform;
+
+        Vector3 throwDirection = cam.forward * throwForce + cam.up * upwardForce;
+
+        rb.AddForce(throwDirection, ForceMode.Impulse);
+
+        rb.AddTorque(Random.insideUnitSphere * torqueForce, ForceMode.Impulse);
     }
 
     private void OnTriggerEnter(Collider other)
