@@ -3,42 +3,65 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public Transform player;
+
+    [SerializeField] private ZombieData zombieData;
+
+    [SerializeField] private float detectionRange = 10f;
     [SerializeField] private float attackRange = 2f;
 
-    public Transform player;
-    public float speed = 3f;
     private NavMeshAgent agent;
     private Animator animator;
-
-    [Header("Detection Radio")]
-    public float detectionRange = 10f;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
+
+        if (player == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null)
+                player = p.transform;
+        }
+
+        if (agent != null && zombieData != null)
+        {
+            agent.speed = zombieData.speed;
+        }
     }
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null)
+            return;
+
+        if (agent == null || !agent.isActiveAndEnabled || !agent.isOnNavMesh)
+            return;
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        if (distance <= detectionRange)
+        if (distance > detectionRange)
         {
+            agent.ResetPath();
+            animator.SetBool("Walk", false);
+            return;
+        }
+
+        if (distance > attackRange)
+        {
+            agent.isStopped = false;
             agent.SetDestination(player.position);
+            animator.SetBool("Walk", true);
         }
         else
         {
-            if (agent.hasPath)
-            {
-                agent.ResetPath();
-            }
+            agent.isStopped = true;
+            animator.SetBool("Walk", false);
+            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
         }
-
-        animator.SetBool("Walk", agent.velocity.magnitude > 0.1f);
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -46,10 +69,5 @@ public class EnemyMovement : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position + Vector3.up, transform.forward * 5f);
     }
 }

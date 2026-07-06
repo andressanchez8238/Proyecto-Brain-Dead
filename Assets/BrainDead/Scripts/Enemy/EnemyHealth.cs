@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private ZombieData zombieData;
+    public WaveManager waveManager;
 
     private Animator animator;
 
@@ -52,8 +53,8 @@ public class EnemyHealth : MonoBehaviour
         foreach (Collider c in colliders)
             c.enabled = false;
 
-        WaveManager.Instance.ZombieKilled();
-
+        WaveManager.Instance.EnemyKilled();
+        waveManager.EnemyKilled();
         Destroy(gameObject, 3f);
     }
 }

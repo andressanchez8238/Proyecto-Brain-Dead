@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Explosivo
   m_EditorClassIdentifier: Assembly-CSharp::Zombie
   ID: 3
+  prefab: {fileID: 4108866640500690228, guid: 85c5e224db20e4f4d9a52615de1063e5, type: 3}
   life: 50
   speed: 10
   damage: 1

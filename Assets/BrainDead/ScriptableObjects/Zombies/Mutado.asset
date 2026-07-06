@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Mutado
   m_EditorClassIdentifier: Assembly-CSharp::Zombie
   ID: 2
+  prefab: {fileID: 2281743841873285065, guid: 85851b50580194e4dac98c46063cf039, type: 3}
   life: 500
   speed: 2
   damage: 2

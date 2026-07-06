@@ -3,66 +3,108 @@ using UnityEngine.AI;
 
 public class EnemyMovementBouncing : MonoBehaviour
 {
+    [Header("Zombie Data")]
+    [SerializeField] private ZombieData zombieData;
+
+    public Transform player;
+
+    [Header("Detection")]
+    [SerializeField] private float detectionRadius = 8f;
     [SerializeField] private float attackRange = 2f;
 
-    public Transform Player;
-    public float speed = 3f;
-    public Transform meshVisual;
-
-    [Header("Detection Radio")]
-    public float detectionRadius = 8f;
-
     [Header("Jump Configuration")]
-    public float frequencyJump = 2f;
-    public float heightJump = 1.5f;
+    [SerializeField] private Transform meshVisual;
+    [SerializeField] private float frequencyJump = 2f;
+    [SerializeField] private float heightJump = 1.5f;
 
-    private NavMeshAgent agente;
+    private NavMeshAgent agent;
     private Animator animator;
 
-    void Start()
+    private void Start()
     {
-        agente = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
+
+        if (agent != null && zombieData != null)
+            agent.speed = zombieData.speed;
+
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+            if (playerObject != null)
+                player = playerObject.transform;
+        }
     }
 
-    void Update()
+    private void Update()
     {
-        if (Player != null)
-        {
-            float distanciaAlJugador = Vector3.Distance(transform.position, Player.position);
+        if (player == null)
+            return;
 
-            if (distanciaAlJugador <= detectionRadius)
-            {
-                agente.SetDestination(Player.position);
-            }
-            else
-            {
-                if (agente.hasPath)
-                {
-                    agente.ResetPath();
-                }
-            }
-            animator.SetBool("Walk", agente.velocity.magnitude > 0.1f);
+        if (agent == null || !agent.isActiveAndEnabled || !agent.isOnNavMesh)
+            return;
+
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        if (distance > detectionRadius)
+        {
+            agent.ResetPath();
+
+            if (animator != null) animator.SetBool("Walk", false);
+
+            ResetJump();
+
+            return;
+        }
+
+        if (distance > attackRange)
+        {
+            agent.isStopped = false;
+
+            agent.SetDestination(player.position);
+
+            if (animator != null) animator.SetBool("Walk", true);
+
             VisualJump();
         }
-        void VisualJump()
+        else
         {
-            if (agente.velocity.magnitude > 0.1f && agente.remainingDistance > agente.stoppingDistance)
-            {
-                float salto = Mathf.Abs(Mathf.Sin(Time.time * frequencyJump * Mathf.PI));
+            agent.isStopped = true;
 
-                Vector3 posicionLocal = meshVisual.localPosition;
-                posicionLocal.y = salto * heightJump;
-                meshVisual.localPosition = posicionLocal;
-            }
-            else
-            {
-                Vector3 posicionLocal = meshVisual.localPosition;
-                posicionLocal.y = Mathf.Lerp(posicionLocal.y, 0, Time.deltaTime * 10f);
-                meshVisual.localPosition = posicionLocal;
-            }
-        } 
+            if (animator != null) animator.SetBool("Walk", false);
+
+            ResetJump();
+
+            Vector3 lookPosition = player.position;
+            lookPosition.y = transform.position.y;
+
+            transform.LookAt(lookPosition);
+        }
     }
+
+    private void VisualJump()
+    {
+        if (meshVisual == null)
+            return;
+
+        float jump = Mathf.Abs(Mathf.Sin(Time.time * frequencyJump * Mathf.PI));
+
+        Vector3 pos = meshVisual.localPosition;
+        pos.y = jump * heightJump;
+        meshVisual.localPosition = pos;
+    }
+
+    private void ResetJump()
+    {
+        if (meshVisual == null)
+            return;
+
+        Vector3 pos = meshVisual.localPosition;
+        pos.y = Mathf.Lerp(pos.y, 0, Time.deltaTime * 10f);
+        meshVisual.localPosition = pos;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -71,6 +113,7 @@ public class EnemyMovementBouncing : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;

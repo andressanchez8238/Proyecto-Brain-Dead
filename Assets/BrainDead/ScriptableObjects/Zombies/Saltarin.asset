@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Saltarin
   m_EditorClassIdentifier: Assembly-CSharp::Zombie
   ID: 1
+  prefab: {fileID: 6252583053423367198, guid: 018ef809ad1961a45bf552e2a1e36341, type: 3}
   life: 80
   speed: 5
   damage: 4

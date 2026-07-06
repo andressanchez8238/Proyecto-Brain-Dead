@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Normal
   m_EditorClassIdentifier: Assembly-CSharp::Zombie
   ID: 0
+  prefab: {fileID: 6964040676100580805, guid: aff4f45cf07beee43b375733b892dcf2, type: 3}
   life: 100
   speed: 4
   damage: 5

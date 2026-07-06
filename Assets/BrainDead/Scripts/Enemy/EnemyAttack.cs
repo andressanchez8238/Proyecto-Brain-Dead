@@ -2,21 +2,45 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField] ZombieData zombieData;
+    [SerializeField] private ZombieData zombieData;
 
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float attackCooldown = 1.5f;
+
+    private Transform player;
     private Animator animator;
+
+    private float timer;
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
+
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+
+        if (p != null)
+            player = p.transform;
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void Update()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (player == null)
+            return;
+
+        timer += Time.deltaTime;
+
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        if (distance <= attackRange && timer >= attackCooldown)
         {
+            timer = 0;
+
             animator.SetTrigger("Attack");
-            StatsPlayer player = collision.gameObject.GetComponentInParent<StatsPlayer>();
-            player.DisminuirVida(zombieData.damage);
+
+            StatsPlayer stats = player.GetComponent<StatsPlayer>();
+
+            if (stats != null)
+                stats.DisminuirVida(zombieData.damage);
         }
     }
 }

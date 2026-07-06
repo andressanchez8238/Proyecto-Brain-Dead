@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.AI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class WaveManager : MonoBehaviour
 
     private int wave = 1;
 
-    private int zombiesAlive = 0;
+    private int aliveEnemies = 0;
 
     private void Awake()
     {
@@ -46,13 +47,16 @@ public class WaveManager : MonoBehaviour
         {
             ZombieData zombie = zombieDatabase.GetZombie();
 
-            currentWave.Enqueue(zombie);
+            if (zombie != null)
+            {
+                currentWave.Enqueue(zombie);
+            }
         }
 
         Debug.Log("Zombies en cola: " + currentWave.Count);
     }
 
-    IEnumerator SpawnWave()
+    private IEnumerator SpawnWave()
     {
         while (!currentWave.IsEmpty())
         {
@@ -63,31 +67,92 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
         }
 
-        Debug.Log("Todos los zombies fueron generados");
+        Debug.Log("Todos los zombies fueron generados.");
     }
 
     private void SpawnZombie(ZombieData zombie)
     {
+        if (zombie == null)
+        {
+            Debug.LogError("ZombieData es NULL.");
+            return;
+        }
+
+        if (zombie.prefab == null)
+        {
+            Debug.LogError($"El zombie '{zombie.name}' no tiene prefab asignado.");
+            return;
+        }
+
+        if (spawnPoints == null || spawnPoints.Length == 0)
+        {
+            Debug.LogError("No existen SpawnPoints asignados.");
+            return;
+        }
+
         Transform point = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        Instantiate(zombie.prefab, point.position, Quaternion.identity);
+        if (point == null)
+        {
+            Debug.LogError("Uno de los SpawnPoints está vacío.");
+            return;
+        }
 
-        zombiesAlive++;
+        GameObject enemy = Instantiate(zombie.prefab, point.position, point.rotation);
 
-        Debug.Log("Zombies vivos: " + zombiesAlive);
+        Debug.Log(enemy.transform.position);
+
+        NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+        {
+            NavMeshHit hit;
+
+            if (NavMesh.SamplePosition(enemy.transform.position, out hit, 3f, NavMesh.AllAreas))
+            {
+                agent.Warp(hit.position);
+            }
+        }
+
+        aliveEnemies++;
+
+        EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+
+        if (health != null)
+        {
+            health.waveManager = this;
+        }
+
+        EnemyMovement movement = enemy.GetComponent<EnemyMovement>();
+
+        if (movement != null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+            if (player != null)
+            {
+                movement.player = player.transform;
+            }
+            else
+            {
+                Debug.LogError("No existe un objeto con el Tag 'Player'.");
+            }
+        }
+
+        Debug.Log($"Zombie generado: {enemy.name}");
     }
 
-    public void ZombieKilled()
+    public void EnemyKilled()
     {
-        zombiesAlive--;
+        aliveEnemies--;
 
-        Debug.Log("Zombie eliminado");
+        Debug.Log($"Zombies vivos: {aliveEnemies}");
 
-        Debug.Log("Quedan vivos: " + zombiesAlive);
-
-        if (zombiesAlive <= 0 && currentWave.IsEmpty())
+        if (aliveEnemies <= 0)
         {
             wave++;
+
+            Debug.Log($"Comienza la oleada {wave}");
 
             StartNextWave();
         }
