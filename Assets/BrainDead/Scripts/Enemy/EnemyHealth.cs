@@ -7,12 +7,14 @@ public class EnemyHealth : MonoBehaviour
     public WaveManager waveManager;
 
     private Animator animator;
+    private ParticleSystem BloodZombie;
 
     private int currentLife;
     private bool dead;
 
     private void Awake()
     {
+        BloodZombie = GetComponentInChildren<ParticleSystem>();
         animator = GetComponentInChildren<Animator>();
 
         currentLife = zombieData.life;
@@ -26,6 +28,7 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log("Daño recibido: " + damage);
 
         currentLife -= damage;
+        ActiveBlood();
 
         Debug.Log("Vida restante: " + currentLife);
 
@@ -57,5 +60,9 @@ public class EnemyHealth : MonoBehaviour
         GameManager.Instance.zombiesKilled++;
         waveManager.EnemyKilled();
         Destroy(gameObject, 3f);
+    }
+    void ActiveBlood()
+    {
+        BloodZombie.Play();
     }
 }

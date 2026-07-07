@@ -6,6 +6,7 @@ public class EnemyAttack : MonoBehaviour
 
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 1.5f;
+    public ParticleSystem ParticlePlayer;
 
     private Transform player;
     private Animator animator;
@@ -20,6 +21,8 @@ public class EnemyAttack : MonoBehaviour
 
         if (p != null)
             player = p.transform;
+        ParticlePlayer=p.GetComponentInChildren<ParticleSystem>();
+        
     }
 
     private void Update()
@@ -41,6 +44,11 @@ public class EnemyAttack : MonoBehaviour
 
             if (stats != null)
                 stats.DisminuirVida(zombieData.damage);
+            CreateParticlePlayer();
         }
+    }
+    private void CreateParticlePlayer()
+    {
+        ParticlePlayer.Play();
     }
 }
