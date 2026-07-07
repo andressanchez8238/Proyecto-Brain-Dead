@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour
 
     private Animator animator;
 
+    private AudioSource audioSource;
+
     private int currentLife;
     private bool dead;
 
@@ -16,6 +18,8 @@ public class EnemyHealth : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         currentLife = zombieData.life;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void TakeDamage(int damage)
@@ -56,6 +60,12 @@ public class EnemyHealth : MonoBehaviour
         WaveManager.Instance.EnemyKilled();
         GameManager.Instance.zombiesKilled++;
         waveManager.EnemyKilled();
+
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+        }
+
         Destroy(gameObject, 3f);
     }
 }

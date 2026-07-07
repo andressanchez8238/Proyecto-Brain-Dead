@@ -13,11 +13,18 @@ public class UIAmmo : MonoBehaviour
         Instance = this;
     }
 
-    public void UpdateAmmo(string weaponName,int currentAmmo,int reserveAmmo)
+    // Armas de fuego
+    public void UpdateAmmo(string weaponName, int currentAmmo, int reserveAmmo)
     {
         weaponNameText.text = weaponName;
-
         ammoText.text = $"{currentAmmo} / {reserveAmmo}";
+    }
+
+    // Herramientas o armas sin munición
+    public void UpdateWeapon(string weaponName)
+    {
+        weaponNameText.text = weaponName;
+        ammoText.text = "--";
     }
 
     public void Hide()

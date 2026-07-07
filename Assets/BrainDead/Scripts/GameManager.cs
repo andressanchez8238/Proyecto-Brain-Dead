@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         RankingManager.Instance.AddScore(new Score(GameManager.Instance.zombiesKilled, GameManager.Instance.waveReached, GameManager.Instance.survivalTime));
-        SceneManager.LoadScene("Escena de Derrota");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene("Pantalla de Derrota");
     }
 }

@@ -91,13 +91,19 @@ public class PlayerInteractor : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext ctx)
     {
-        if (equipmentManager.CurrentWeapon == null)
+        if (equipmentManager.CurrentWeapon != null)
         {
-            Debug.Log("No hay arma equipada");
+            equipmentManager.CurrentWeapon.Shoot();
             return;
         }
 
-        equipmentManager.CurrentWeapon.Shoot();
+        if (equipmentManager.CurrentAxe != null)
+        {
+            equipmentManager.CurrentAxe.Attack();
+            return;
+        }
+
+        Debug.Log("No hay arma equipada");
     }
 
     private void Reload(InputAction.CallbackContext ctx)

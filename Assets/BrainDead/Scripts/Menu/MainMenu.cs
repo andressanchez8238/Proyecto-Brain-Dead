@@ -32,8 +32,8 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
-        GameManager.Instance.ResetStats();
         SceneManager.LoadScene("Andres");
+        GameManager.Instance.ResetStats();
     }
     public void PlayMenu()
     {

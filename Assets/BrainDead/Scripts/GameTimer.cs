@@ -39,7 +39,10 @@ public class GameTimer : MonoBehaviour
         finished = true;
 
         RankingManager.Instance.scores.Add(new Score( GameManager.Instance.zombiesKilled, GameManager.Instance.waveReached, GameManager.Instance.survivalTime));
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene("Pantalla de Victoria");
+
+
     }
 }

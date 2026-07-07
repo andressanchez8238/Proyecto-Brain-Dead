@@ -4,6 +4,10 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private Transform bulletSpawn;
 
+    [SerializeField] private AudioSource audioSource;
+
+    [SerializeField] private AudioClip shootSound;
+
     private Camera playerCamera;
 
     public WeaponData weaponData;
@@ -12,6 +16,8 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+
         bulletSpawn = transform.GetComponentInChildren<Transform>();
 
         foreach (Transform child in GetComponentsInChildren<Transform>())
@@ -68,6 +74,11 @@ public class Weapon : MonoBehaviour
         GameObject bullet = Instantiate(weaponData.bulletPrefab, bulletSpawn.position, Quaternion.identity);
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
+
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
 
         bulletScript.Initialize(weaponData.damage);
 

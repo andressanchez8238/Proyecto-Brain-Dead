@@ -4,6 +4,8 @@ public class EquipmentManager : MonoBehaviour
 {
     public Weapon CurrentWeapon { get; private set; }
 
+    public Axe CurrentAxe { get; private set; }
+
     public Transform handPoint;
 
     private GameObject currentObject;
@@ -14,29 +16,39 @@ public class EquipmentManager : MonoBehaviour
             return;
 
         if (currentObject != null)
-        {
             Destroy(currentObject);
-        }
 
-        currentObject = Instantiate(item.handPrefab, handPoint.position, handPoint.rotation,handPoint);
+        currentObject = Instantiate(item.handPrefab, handPoint.position, handPoint.rotation, handPoint);
+
+        CurrentWeapon = null;
+        CurrentAxe = null;
 
         Weapon weapon = currentObject.GetComponent<Weapon>();
 
         if (weapon != null)
         {
+            CurrentWeapon = weapon;
+
             weapon.SetWeaponData(item as WeaponData);
 
-            CurrentWeapon = weapon;
-
             CurrentWeapon.Initialize(state);
+
+            UIAmmo.Instance.UpdateAmmo(weapon.weaponData.itemName, state.currentAmmo, AmmoManager.Instance.GetAmmo(weapon.weaponData.ammoType));
+
+            return;
         }
 
-        CurrentWeapon = null;
+        Axe axe = currentObject.GetComponent<Axe>();
 
-        if (weapon != null)
+        if (axe != null)
         {
-            CurrentWeapon = weapon;
-            CurrentWeapon.Initialize(state);
+            CurrentAxe = axe;
+
+            UIAmmo.Instance.UpdateWeapon(axe.axeData.itemName);
+
+            return;
         }
+
+        UIAmmo.Instance.Hide();
     }
 }

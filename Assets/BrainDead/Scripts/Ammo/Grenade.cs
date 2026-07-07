@@ -1,10 +1,20 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Grenade : MonoBehaviour
 {
+    [SerializeField] private AudioClip explosionSound;
+
+    private AudioSource audioSource;
+
     public float explosionDelay = 3f;
     public float explosionRadius = 5f;
     public int damage = 50;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -25,7 +35,9 @@ public class Grenade : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        audioSource.PlayOneShot(explosionSound);
+
+        Destroy(gameObject, explosionSound.length);
     }
 
     private void OnDrawGizmosSelected()
