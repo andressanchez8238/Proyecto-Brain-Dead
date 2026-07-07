@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/BrainDead/Scenes/Andres.unity
     guid: b384a97410803f34c9f78691ab50bff0
   - enabled: 1
+    path: Assets/BrainDead/Scenes/Pantalla de Victoria.unity
+    guid: 2a92da9f624ed7b4290a7db9d6f1c038
+  - enabled: 1
     path: Assets/BrainDead/Scenes/Pantalla de Derrota.unity
     guid: 17b3a57340ec48043b066dc959371755
   m_configObjects:

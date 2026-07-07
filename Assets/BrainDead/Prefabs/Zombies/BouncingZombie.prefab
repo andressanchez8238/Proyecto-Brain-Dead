@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5262811222901972009}
   - component: {fileID: 9010965934460561992}
   - component: {fileID: 8446457479679160648}
+  - component: {fileID: -1571716931689734506}
   m_Layer: 0
   m_Name: BouncingZombie
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6252583053423367198}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000004172325}
-  m_LocalPosition: {x: 5.143215, y: 1, z: 65.23852}
+  m_LocalPosition: {x: 5.143215, y: 0, z: 65.23852}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -106,9 +107,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.10058
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.95019734, z: 0}
 --- !u!195 &5262811222901972009
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -128,7 +129,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &9010965934460561992
@@ -164,6 +165,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   zombieData: {fileID: 11400000, guid: 01dc58812772e964883fe369878bb58d, type: 2}
   waveManager: {fileID: 0}
+--- !u!114 &-1571716931689734506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252583053423367198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f917dba52a5450245973ccd145fa5825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
+  zombieData: {fileID: 11400000, guid: 01dc58812772e964883fe369878bb58d, type: 2}
+  attackRange: 2
+  attackCooldown: 1.5
 --- !u!1001 &7546379303702452149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,7 +194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1432951499188351216, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1432951499188351216, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
       propertyPath: m_LocalPosition.z
@@ -215,6 +231,22 @@ PrefabInstance:
     - target: {fileID: 1776966266084158026, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
       propertyPath: m_Name
       value: Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100917979952542564, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: -0.028591543
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100917979952542564, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.9748863
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000411217713348374, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000411217713348374, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject optionsMenu;
+    public GameObject rankingPanel;
 
     public void OpenOptionsPanel()
     {
@@ -17,9 +18,21 @@ public class MainMenu : MonoBehaviour
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
     }
+    public void OpenRankingPanel()
+    {
+        mainMenu.SetActive(false);
 
+        rankingPanel.SetActive(true);
+    }
+    public void CloseRankingPanel()
+    {
+        rankingPanel.SetActive(false);
+
+        mainMenu.SetActive(true);
+    }
     public void PlayGame()
     {
+        GameManager.Instance.ResetStats();
         SceneManager.LoadScene("Andres");
     }
     public void PlayMenu()

@@ -54,6 +54,7 @@ public class EnemyHealth : MonoBehaviour
             c.enabled = false;
 
         WaveManager.Instance.EnemyKilled();
+        GameManager.Instance.zombiesKilled++;
         waveManager.EnemyKilled();
         Destroy(gameObject, 3f);
     }

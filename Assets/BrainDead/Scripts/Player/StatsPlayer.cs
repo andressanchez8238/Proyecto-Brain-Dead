@@ -43,9 +43,29 @@ public class StatsPlayer : MonoBehaviour
     public void DisminuirVida(int daño)
     {
         VidaActual -= daño;
+
+        if (VidaActual < 0)
+            VidaActual = 0;
+
+        Debug.Log("Vida: " + VidaActual);
+
+        if (VidaActual <= 0)
+        {
+            Morir();
+        }
     }
+    private void Morir()
+    {
+        Debug.Log("El jugador ha muerto");
+
+        GameManager.Instance.EndGame();
+    }
+
     public void AumentarVida(int curacion)
     {
         VidaActual += curacion;
+
+        if (VidaActual > MaxVida)
+            VidaActual = MaxVida;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,12 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float detectionRange = 10f;
     [SerializeField] private float attackRange = 2f;
 
+    [SerializeField] private float graphUpdateInterval = 1f;
+    private List<GraphNode> currentPath;
+
+    private int currentNodeIndex;
+    private float graphUpdateTimer;
+    
     private NavMeshAgent agent;
     private Animator animator;
 
@@ -29,6 +36,21 @@ public class EnemyMovement : MonoBehaviour
         {
             agent.speed = zombieData.speed;
         }
+
+        UpdateGraphPath();
+    }
+    private void UpdateGraphPath()
+    {
+        if (player == null)
+            return;
+
+        GraphNode start = GraphManager.Instance.GetClosestNode(transform.position);
+
+        GraphNode goal = GraphManager.Instance.GetClosestNode(player.position);
+
+        currentPath = GraphSearch.FindPath(start, goal);
+
+        currentNodeIndex = 0;
     }
 
     void Update()
@@ -48,10 +70,34 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
+        graphUpdateTimer += Time.deltaTime;
+
+        if (graphUpdateTimer >= graphUpdateInterval)
+        {
+            graphUpdateTimer = 0f;
+            UpdateGraphPath();
+        }
+
         if (distance > attackRange)
         {
             agent.isStopped = false;
-            agent.SetDestination(player.position);
+
+            if (currentPath != null && currentNodeIndex < currentPath.Count)
+            {
+                GraphNode node = currentPath[currentNodeIndex];
+
+                agent.SetDestination(node.transform.position);
+
+                if (Vector3.Distance(transform.position, node.transform.position) < 1f)
+                {
+                    currentNodeIndex++;
+                }
+            }
+            else
+            {
+                agent.SetDestination(player.position);
+            }
+
             animator.SetBool("Walk", true);
         }
         else
@@ -69,5 +115,17 @@ public class EnemyMovement : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (currentPath == null)
+            return;
+
+        Gizmos.color = Color.cyan;
+
+        for (int i = 0; i < currentPath.Count - 1; i++)
+        {
+            Gizmos.DrawLine(currentPath[i].transform.position, currentPath[i + 1].transform.position);
+        }
     }
 }

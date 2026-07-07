@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7503482671391555392}
   - component: {fileID: 8655593223700183452}
   - component: {fileID: 2298176269859291687}
+  - component: {fileID: -6625749463200407320}
   m_Layer: 0
   m_Name: ExplosiveZombie
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4108866640500690228}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000004172325}
-  m_LocalPosition: {x: -0.4285164, y: 1, z: 64.48852}
+  m_LocalPosition: {x: -0.4285164, y: 0, z: 64.48852}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -106,9 +107,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.1364114
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.9234468, z: 0}
 --- !u!195 &7503482671391555392
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -128,7 +129,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &8655593223700183452
@@ -147,6 +148,7 @@ MonoBehaviour:
   zombieData: {fileID: 11400000, guid: d61133b61f5808e4cb302c7013ae6239, type: 2}
   detectionRange: 10
   attackRange: 2
+  graphUpdateInterval: 1
 --- !u!114 &2298176269859291687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +163,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   zombieData: {fileID: 11400000, guid: d61133b61f5808e4cb302c7013ae6239, type: 2}
   waveManager: {fileID: 0}
+--- !u!114 &-6625749463200407320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4108866640500690228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f917dba52a5450245973ccd145fa5825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
+  zombieData: {fileID: 11400000, guid: d61133b61f5808e4cb302c7013ae6239, type: 2}
+  attackRange: 2.5
+  attackCooldown: 1.5
 --- !u!1001 &7775033221438025774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -175,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1432951499188351216, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1432951499188351216, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
       propertyPath: m_LocalPosition.z
@@ -212,6 +229,22 @@ PrefabInstance:
     - target: {fileID: 1776966266084158026, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
       propertyPath: m_Name
       value: Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100917979952542564, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: -0.034632236
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100917979952542564, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.9688456
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000411217713348374, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000411217713348374, guid: f99bbd0754201f448b27f0c455b92b76, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

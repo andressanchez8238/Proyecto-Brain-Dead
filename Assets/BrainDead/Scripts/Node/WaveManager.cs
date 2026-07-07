@@ -100,8 +100,6 @@ public class WaveManager : MonoBehaviour
 
         GameObject enemy = Instantiate(zombie.prefab, point.position, point.rotation);
 
-        Debug.Log(enemy.transform.position);
-
         NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
 
         if (agent != null)
@@ -151,6 +149,8 @@ public class WaveManager : MonoBehaviour
         if (aliveEnemies <= 0)
         {
             wave++;
+
+            GameManager.Instance.waveReached = wave;
 
             Debug.Log($"Comienza la oleada {wave}");
 

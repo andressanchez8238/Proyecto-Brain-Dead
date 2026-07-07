@@ -1,26 +1,36 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
+
+    public int zombiesKilled;
+    public int waveReached;
+    public float survivalTime;
+
     private void Awake()
     {
-        if (instance != null && instance!=this) 
+        if (Instance == null)
         {
-            Destroy(gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
         }
     }
-    private void Start()
+
+    public void ResetStats()
     {
-        
+        zombiesKilled = 0;
+        waveReached = 1;
+        survivalTime = 0;
     }
-    private void Update()
+    public void EndGame()
     {
-        
+        RankingManager.Instance.AddScore(new Score(GameManager.Instance.zombiesKilled, GameManager.Instance.waveReached, GameManager.Instance.survivalTime));
+        SceneManager.LoadScene("Escena de Derrota");
     }
 }
